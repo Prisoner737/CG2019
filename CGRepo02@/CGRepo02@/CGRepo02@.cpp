@@ -10,7 +10,7 @@
 int WindowXsize;//실행되는 윈도우의 사이즈
 int WindowYsize;
 
-float radius ; //공의 반지름
+float radius; //공의 반지름
 
 float C1xDelta; //초기 1번공(빨강)의 x좌표
 float C1yDelta;//초기 1번공(빨강)의 y좌표
@@ -40,28 +40,28 @@ void SystemInitializer(float cir1speed) {//전역변수값을 초기화하며, �
 	WindowXsize = 600;
 	WindowYsize = 600;
 
-	radius = 0.2; 
+	radius = 0.2;
 
-	C1xDelta = 0.0; 
+	C1xDelta = 0.0;
 	C1yDelta = -0.5;
-	C1CurXSpeed = 0; 
-	
+	C1CurXSpeed = 0;
+
 	if (cir1speed == 0)
 		C1CurYSpeed = 0;
 	else
 		C1CurYSpeed = cir1speed;
 
-	C2xDelta = 0.0; 
-	C2yDelta = 0.5; 
-	C2CurXSpeed = 0; 
-	C2CurYSpeed = 0; 
+	C2xDelta = 0.0;
+	C2yDelta = 0.5;
+	C2CurXSpeed = 0;
+	C2CurYSpeed = 0;
 
 	CircleCollisionCount = 0;
-	CirCollisionflag = 0; 
+	CirCollisionflag = 0;
 
-	C1WallCollision = 0; 
-	C1ColFlag = 0; 
-	C1SpeedReducer = 20; 
+	C1WallCollision = 0;
+	C1ColFlag = 0;
+	C1SpeedReducer = 20;
 
 	C2WallCollision = 0;
 	C2ColFlag = 0;
@@ -70,7 +70,45 @@ void SystemInitializer(float cir1speed) {//전역변수값을 초기화하며, �
 	WallCounter1Turnner = 2;
 	WallCounter2Turnner = 3;
 }
+//
+#ifndef M_PI
+#define M_PI 3.14159265
+#endif
 
+void Draw_Body() {
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(5.0, 5.0, 0.0);
+	glVertex3f(5.0, -5.0, 0.0);
+	glVertex3f(-5.0, -5.0, 0.0);
+	glVertex3f(-5.0, 5.0, 0.0);
+	glEnd();
+}
+
+void Draw_UpperArm() {
+	glBegin(GL_POLYGON);
+	glColor3f(1.0f, 1.0f, 0.0f);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, 3.0, 0.0);
+	glVertex3f(7.0, 3.0, 0.0);
+	glVertex3f(7.0, 0.0, 0.0);
+	glEnd();
+}
+
+
+void MyDrawBody() {
+	Draw_Body();
+	glutSwapBuffers();
+}
+
+void MyReshape(int w, int h) {
+	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 2.0);
+}
+
+//
 
 void DrawCircle1(float cx, float cy, float r) //1번 빨간색 공을 그리는 함수
 {
@@ -122,6 +160,7 @@ void MyDisplay() { //공 2개를 그리는 함수
 	glClear(GL_COLOR_BUFFER_BIT);
 	DrawCircle1(0 + C1xDelta, 0 + C1yDelta, radius);
 	DrawCircle2(0 + C2xDelta, 0 + C2yDelta, radius);
+	Draw_Body();
 
 	glutSwapBuffers();
 }
@@ -206,7 +245,7 @@ void MyTimer(int Value) { //timer에 의해 call되는 함수로 대부분의 �
 	if (CircleCollisionCount == 4) //만일 서로 공이 2번 이상 충돌할 경우 stop
 	{ //CircleCollisionCount거 2가 아닌 이유는 충돌시 공의 속도에 따라서 바로 방향을 바꾸더라도
 	  // 공의 위치가 반지름의 영향을 받아서 충돌 후 이격이 1사이클의 timer로는 제대로 되지 않는 경우가 
-      //있기에 4라는 값을 실험으로 얻어진 값으로, 최소 3번의 timer call이상 후 두 공이 지름 범위 이상으로 이격됨
+	  //있기에 4라는 값을 실험으로 얻어진 값으로, 최소 3번의 timer call이상 후 두 공이 지름 범위 이상으로 이격됨
 		C1CurXSpeed = 0;
 		C1CurYSpeed = 0;
 		C2CurXSpeed = 0;
@@ -229,9 +268,9 @@ void MyTimer(int Value) { //timer에 의해 call되는 함수로 대부분의 �
 		C1CurXSpeed = magC1 * sqrt(3) / 2; //각각을 x,y방향의 vector성분으로 분리하여 속도를 결정
 		C1CurYSpeed = magC1 * 1 / 2;
 		C2CurXSpeed = magC1 * 1 / 2 * (-1);
-		C2CurYSpeed = magC1 * sqrt(3) / 2; 
+		C2CurYSpeed = magC1 * sqrt(3) / 2;
 
-		CirCollisionflag = 0; 
+		CirCollisionflag = 0;
 	}
 
 	if (C1ColFlag != 0)//Circle1의 벽과 충돌시 이동 경로를 변경
@@ -322,7 +361,7 @@ void MyTimer(int Value) { //timer에 의해 call되는 함수로 대부분의 �
 	}
 
 
-		
+
 
 
 
@@ -335,30 +374,6 @@ void MyTimer(int Value) { //timer에 의해 call되는 함수로 대부분의 �
 	glutTimerFunc(10, MyTimer, 1); //msec
 }
 
-void MyKeyboard(unsigned char KeyPressed, int X, int Y) {// ketboard 인터럽트를 처리하는 부분 
-	switch (KeyPressed) {
-
-	case 'S'://대문자 S를 누르면, 2공이 2번 부딫처서 멈출때 까지 시뮬레이션을 진행
-		C1CurYSpeed = 0.01;
-		WallCounter1Turnner = 10;
-		WallCounter2Turnner = 10;
-		break;
-	case 's': //소문자 s를 누르면 2공이 1번 충돌 후, 벽에 각각 2,3번 부딫치는 과정을 시뮬레이션
-		C1CurYSpeed = 0.01; break;
-	case 'R': //대문자 소문자 상관없이 R,r은 해당 시뮬레이션을 재실행
-		SystemInitializer(0);
-		break;
-	case 'r':
-		SystemInitializer(0);
-		break;
-	case 'Q'://Q,q,ESC는 실행종료
-		quick_exit(0); break;
-	case 'q':
-		quick_exit(0); break;
-	case 27:                //'esc' 키의 아스키 코드 값
-		quick_exit(0); break;
-	}
-}
 
 int main(int argc, char** argv) {
 	SystemInitializer(0);
@@ -372,7 +387,7 @@ int main(int argc, char** argv) {
 	glLoadIdentity();
 	glOrtho(-1.0, 1.0, -1.0, 1.0, 1.0, -1.0);
 	glutDisplayFunc(MyDisplay); //디스플레이 이벤트 핸들러 등록
-	glutKeyboardFunc(MyKeyboard); //키보드 인터럽트 핸들러 등록
+	glutReshapeFunc(MyReshape);
 	glutTimerFunc(40, MyTimer, 1);//타이머 인터럽트 
 	glutMainLoop();//해당과정을 loop
 	return 0;

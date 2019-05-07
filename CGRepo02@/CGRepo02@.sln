@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.539
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CGRepo02@", "CGRepo02@\CGRepo02@.vcxproj", "{23CFD21C-17E5-42A4-8EE7-4CDDA2BF3D55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23CFD21C-17E5-42A4-8EE7-4CDDA2BF3D55}.Debug|x64.ActiveCfg = Debug|x64
+		{23CFD21C-17E5-42A4-8EE7-4CDDA2BF3D55}.Debug|x64.Build.0 = Debug|x64
+		{23CFD21C-17E5-42A4-8EE7-4CDDA2BF3D55}.Debug|x86.ActiveCfg = Debug|Win32
+		{23CFD21C-17E5-42A4-8EE7-4CDDA2BF3D55}.Debug|x86.Build.0 = Debug|Win32
+		{23CFD21C-17E5-42A4-8EE7-4CDDA2BF3D55}.Release|x64.ActiveCfg = Release|x64
+		{23CFD21C-17E5-42A4-8EE7-4CDDA2BF3D55}.Release|x64.Build.0 = Release|x64
+		{23CFD21C-17E5-42A4-8EE7-4CDDA2BF3D55}.Release|x86.ActiveCfg = Release|Win32
+		{23CFD21C-17E5-42A4-8EE7-4CDDA2BF3D55}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37BD9ADD-D043-4CC0-8E6A-72215205F6CA}
+	EndGlobalSection
+EndGlobal
