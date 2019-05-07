@@ -174,7 +174,7 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); //애니메이션 구현에 double buffer를 사용
 	glutInitWindowSize(700, 700);
 	glutInitWindowPosition(0, 0);
-	glutCreateWindow("사람 움직임 애니메이션 - 201500122 고 병 현");
+	glutCreateWindow("CG2019 Report 02 - 사람 움직임 애니메이션 - 201500122 고 병 현");
 	glClearColor(0.5, 0.5, 0.5, 0.0);
 	InitLight();
 	InitVisibility();
